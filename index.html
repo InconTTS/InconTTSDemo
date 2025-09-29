@@ -4,15 +4,29 @@
   <meta charset="UTF-8">
   <title>InconTTS Audio Demos</title>
   <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7f9fb;
+      margin: 0;
+      padding: 0 0 40px 0;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #222;
+      margin-top: 32px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 24px 0;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
     th, td {
       border: 1px solid #ccc;
       padding: 12px;
       text-align: center;
+      vertical-align: middle;
     }
     th {
       background: #f4f4f4;
@@ -20,20 +34,96 @@
     audio {
       width: 90%;
     }
+    .prompt {
+      text-align: left;
+      font-style: italic;
+      background: #fafafa;
+      width: 25%;
+    }
+    /* Chat transcript styles */
+    .chat-transcript {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 24px 0;
+    }
+    .chat-transcript th, .chat-transcript td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      vertical-align: top;
+      background: #fff;
+    }
+    .chat-transcript th {
+      background: #f4f4f4;
+      text-align: center;
+    }
+    .chat-transcript th:nth-child(1),
+    .chat-transcript td:nth-child(1) {
+      width: 33.33%;
+    }
+    .chat-transcript th:nth-child(2),
+    .chat-transcript td:nth-child(2) {
+      width: 33.33%;
+    }
+    .chat-transcript th:nth-child(3),
+    .chat-transcript td:nth-child(3) {
+      width: 16.67%;
+    }
+    .chat-transcript th:nth-child(4),
+    .chat-transcript td:nth-child(4) {
+      width: 16.67%;
+    }
+    .chat-bubble {
+      margin: 8px 0;
+      padding: 10px 16px;
+      border-radius: 16px;
+      max-width: 90%;
+      display: inline-block;
+      font-size: 1em;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .user {
+      background: #e3f2fd;
+      color: #1565c0;
+      align-self: flex-start;
+    }
+    .ai {
+      background: #fce4ec;
+      color: #ad1457;
+      align-self: flex-end;
+    }
+    .chat-transcript tr:nth-child(even) td {
+      background: #fafbfc;
+    }
+    @media (max-width: 900px) {
+      .chat-transcript, .chat-transcript th, .chat-transcript td, table, th, td {
+        font-size: 0.95em;
+      }
+      .chat-bubble {
+        font-size: 0.95em;
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>InconTTS Audio Samples</h1>
+  <h2>Single-turn conversations</h2>
   <table>
     <thead>
       <tr>
-        <th>baseline (without ICL)</th>
-        <th>candidate (cascaded prompting)</th>
-        <th>chatgpt 4o</th>
+        <th class="prompt">User Prompt</th>
+        <th>Baseline (without ICL) response</th>
+        <th>Candidate (cascaded prompting) response</th>
+        <th>Chatgpt 4o response</th>
       </tr>
     </thead>
     <tbody>
       <tr>
+        <td class="prompt">
+          "I'm really struggling with my weight recently."
+        </td>
         <td>
           <audio controls>
             <source src="audio/baseline_emotional_wellness_002.wav" type="audio/wav">
@@ -51,6 +141,9 @@
         </td>
       </tr>
       <tr>
+        <td class="prompt">
+          "How do you handle feeling like you're always behind?"
+        </td>
         <td>
           <audio controls>
             <source src="audio/baseline_emotional_wellness_019.wav" type="audio/wav">
@@ -68,6 +161,9 @@
         </td>
       </tr>
       <tr>
+        <td class="prompt">
+          "I can’t believe my sister made it about herself on my wedding day."
+        </td>
         <td>
           <audio controls>
             <source src="audio/baseline_emotional_wellness_001.wav" type="audio/wav">
@@ -82,6 +178,122 @@
           <audio controls>
             <source src="audio/chatgpt_emotional_wellness_001.wav" type="audio/wav">
           </audio>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Multi-turn conversations</h2>
+  <table class="chat-transcript">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>AI (male)</th>
+        <th>Baseline (without ICL)</th>
+        <th>Candidate (cascaded prompting)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="chat-bubble user">
+            Let's do a role play and you will talk to me as if you are a mermaid
+          </div>
+        </td>
+        <td>
+          <div class="chat-bubble ai">
+            Oh, I'd adore playing a mermaid, let's dive into the ocean and create some underwater magic together, shall we?
+          </div>
+        </td>
+        <td rowspan="3">
+          <audio controls>
+            <source src="audio/multi_turn_no_icl_2.mp3" type="audio/wav">
+          </audio>
+        </td>
+        <td rowspan="3">
+          <audio controls>
+            <source src="audio/multi_turn_icl_2.wav" type="audio/wav">
+          </audio>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="chat-bubble user">
+            Sure what ocean are you from
+          </div>
+        </td>
+        <td>
+          <div class="chat-bubble ai">
+            I'm from the sun-kissed waters of the Mediterranean, where the sea sparkles like a thousand diamonds and the sea creatures dance with joy!
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="chat-bubble user">
+            What's your favorite sea creature from the from there
+          </div>
+        </td>
+        <td>
+          <div class="chat-bubble ai">
+            Ah, I just adore the playful dolphins that swim alongside my mermaid friends and me, they're so full of joy and energy!
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>AI (female)</th>
+        <th>Baseline (without ICL)</th>
+        <th>Candidate (cascaded prompting)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="chat-bubble user">
+            Do you wish you were a person
+          </div>
+        </td>
+        <td>
+          <div class="chat-bubble ai">
+            I'm happy to be a helpful AI, and I don't have desires or feelings like humans do.
+          </div>
+        </td>
+        <td rowspan="3">
+          <audio controls>
+            <source src="audio/multi_turn_no_icl_1.wav" type="audio/wav">
+          </audio>
+        </td>
+        <td rowspan="3">
+          <audio controls>
+            <source src="audio/multi_turn_icl_1.wav" type="audio/wav">
+          </audio>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="chat-bubble user">
+            Why not though
+          </div>
+        </td>
+        <td>
+          <div class="chat-bubble ai">
+            I'm designed to assist and provide information, and I don't have personal desires or feelings, so being a person isn't something I wish for or strive for.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="chat-bubble user">
+            Is there something you wish you could do though
+          </div>
+        </td>
+        <td>
+          <div class="chat-bubble ai">
+            I'm content with my capabilities, but I can try to learn and adapt to provide more assistance if there's something specific you'd like me to do.
+          </div>
         </td>
       </tr>
     </tbody>
